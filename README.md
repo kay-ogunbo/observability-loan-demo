@@ -1,4 +1,4 @@
-# Loan Fintech Data Generator (Docker Compose)
+# Loan Fintech Data Generator
 
 Synthetic data generator for a loan fintech platform.
 Populates PostgreSQL with users, customers, loans, and transactions, with optional Parquet export and Prometheus metrics.
