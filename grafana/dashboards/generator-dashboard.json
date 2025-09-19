@@ -1,0 +1,90 @@
+{
+  "uid": "loan-generator-metrics",
+  "title": "Loan Generator — Metrics",
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "10s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Transactions/sec (1m)",
+      "uid": "tx-rate",
+      "gridPos": {"x":0,"y":0,"w":12,"h":6},
+      "targets": [
+        {
+          "expr": "rate(transactions_streamed_total[1m])",
+          "refId": "A",
+          "legendFormat": "tx/s"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Total Transactions Streamed",
+      "uid": "tx-total",
+      "gridPos": {"x":12,"y":0,"w":6,"h":3},
+      "targets": [
+        {
+          "expr": "transactions_streamed_total",
+          "refId": "A"
+        }
+      ],
+      "options": {"reduceOptions": {"calcs": ["last"]}}
+    },
+    {
+      "type": "timeseries",
+      "title": "Chunk Duration (95th pct over 5m)",
+      "uid": "chunk-duration",
+      "gridPos": {"x":0,"y":6,"w":12,"h":6},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(chunk_generation_seconds_bucket[5m])) by (le))",
+          "refId": "A",
+          "legendFormat": "p95 chunk secs"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Chunks processed/sec (1m)",
+      "uid": "chunks-rate",
+      "gridPos": {"x":12,"y":3,"w":6,"h":3},
+      "targets": [
+        {
+          "expr": "rate(chunks_processed_total[1m])",
+          "refId": "A",
+          "legendFormat": "chunks/s"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Generation errors (rate 5m)",
+      "uid": "errors-rate",
+      "gridPos": {"x":12,"y":6,"w":6,"h":3},
+      "targets": [
+        {
+          "expr": "rate(generation_errors_total[5m])",
+          "refId": "A",
+          "legendFormat": "errors/s"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Parquet chunks written (total)",
+      "uid": "parquet-chunks",
+      "gridPos": {"x":12,"y":9,"w":6,"h":3},
+      "targets": [
+        {
+          "expr": "parquet_chunks_written_total",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "templating": {"list": []},
+  "annotations": {"list": []},
+  "overwrite": true
+}

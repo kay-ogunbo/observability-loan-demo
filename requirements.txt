@@ -1,0 +1,5 @@
+Faker
+psycopg2-binary
+pyarrow
+orjson
+prometheus_client

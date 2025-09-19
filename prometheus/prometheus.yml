@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'generator'
+    honor_labels: true
+    static_configs:
+      - targets: ['generator:8000']   # scrapes generator metrics (service name in compose)
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
